@@ -9,6 +9,7 @@ public class CustomArrayList<T> implements CustomList<T> {
 
 	@Override
 	public boolean add(T item) {
+	
 		if (size == itemsArray.length) {
 			itemsArray = Arrays.copyOf(itemsArray, itemsArray.length * 2);
 		}
@@ -21,18 +22,9 @@ public class CustomArrayList<T> implements CustomList<T> {
 	@Override
 	public boolean add(int index, T item) throws IndexOutOfBoundsException {
 		try {
-			if (size == itemsArray.length) {
-				itemsArray = Arrays.copyOf(itemsArray, itemsArray.length * 2);
-			}
-			
-			tempObj = this.itemsArray[index];
-			size++;
-			for (int i = size-1; i > index+1; i--) {
-				this.itemsArray[i] =this.itemsArray[i-1];
-			}
-			
+		
+			tempObj = this.itemsArray[index];			
 			this.itemsArray[index] = item;
-			this.itemsArray[index+1] = tempObj;
 			return true;			
 			
 		}catch(IndexOutOfBoundsException e) {
@@ -61,19 +53,11 @@ public class CustomArrayList<T> implements CustomList<T> {
 	public T remove(int index) throws IndexOutOfBoundsException {
 		try {
 			tempObj = this.itemsArray[index];
-		
-				Object[] itemsArrayTemp = new Object[size-1];
-				
-				for(int i=0; i<index;i++) {
-					itemsArrayTemp[i]=itemsArray[i];
+			this.itemsArray[index]=null;			
+				for (int i=index; i < size-1; i++) {
+					this.itemsArray[i]=this.itemsArray[i+1];
+					this.itemsArray[i+1] = null;
 				}
-				
-				for (int i=index; i< itemsArrayTemp.length; i++) {
-					itemsArrayTemp[i]=this.itemsArray[i+1];
-				}
-				
-				this.itemsArray =itemsArrayTemp;
-				size = this.itemsArray.length;
 				return (T) tempObj;	
 		}catch (IndexOutOfBoundsException e) {
             System.out.println("Index out of bounds. The current size of this list is: " + size);
