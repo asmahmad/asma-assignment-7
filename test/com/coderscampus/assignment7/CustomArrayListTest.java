@@ -45,8 +45,8 @@ class CustomArrayListTest {
 	
 		//Assert:
 		assertEquals(5,sut.get(0)); //Checking if the item 5 is add at the given index: 0  -> Expected: 5 , Actual: ?
-	//	assertEquals(80,sut.get(30)); //Checking if the item 80 is add at the given index: 30  -> Expected: 30 , Actual: ?
-	//	assertEquals(1002, sut.getSize()); //Checking if the length of the list is adjusting if we add more items to it -> Expected: 1002 , Actual: ?
+		assertEquals(80,sut.get(30)); //Checking if the item 80 is add at the given index: 30  -> Expected: 80 , Actual: ?
+		assertEquals(102, sut.getSize()); //Checking if the length of the list is adjusting if we add more items to it -> Expected: 102 , Actual: ?
 	}
 	
 	@Test
@@ -69,8 +69,9 @@ class CustomArrayListTest {
 		sut.get(3000);//Checking Index out of Bound Exception
 		
 		//Assert:
-		assertEquals(903, sut.get(11));//Checking if the item: 1 is removed at index:0  -> Expected: 2 , Actual: ? 
-		assertEquals(12, sut.getSize());//Checking if the length of the list is adjusting if we remove more items to it -> Expected: 999 , Actual: ?
+		assertEquals(90,sut.get(0));
+		assertEquals(903, sut.get(11));//Checking if the item: 1 is removed at index:0  -> Expected: 903 , Actual: ? 
+		assertEquals(12, sut.getSize());//Checking if the length of the list is adjusting if we remove more items to it -> Expected: 12 , Actual: ?
 	}
 	
 	@Test
@@ -82,17 +83,19 @@ class CustomArrayListTest {
 		CustomList<Integer> sut = new CustomArrayList<>();
 		
 		//Act:
-		addItems(sut,1000);
-		sut.add(5,5);
-		sut.add(10,10);
-		sut.add(15,15);
+		addItems(sut,10);
+		sut.remove(0);
+		sut.add(0,5);
+		sut.add(10);
+		sut.add(15);
 		sut.remove(0);
 		sut.remove(1);
+		sut.add(10,115);
 		sut.get(9000);//Checking Index out of bound Exception
 		//Assert:
-		assertEquals(5, sut.get(2)); //Checking if the items are successfully removed from the list and the rest move to the left -> Expected: 5 at index: 2 , Actual: ?
-		assertEquals(10, sut.get(8)); //Checking if the items are successfully removed from the list and the rest move to the left -> Expected: 10 at index:8 , Actual: ?
-		assertEquals(1001,sut.getSize());//Checking while adding and removing items the size of the list is maintained. -> Expected: 1001, Actual: ? 
+		assertEquals(115, sut.get(10)); 
+		assertEquals(2, sut.get(0)); 
+		assertEquals(11,sut.getSize());//Checking while adding and removing items the size of the list is maintained. -> Expected: 11, Actual: ? 
 	}
 	public static void addItems(CustomList<Integer> sut, int size) {
 		for(int i =0; i<size;i++)

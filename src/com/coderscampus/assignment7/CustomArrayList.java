@@ -1,8 +1,5 @@
 package com.coderscampus.assignment7;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CustomArrayList<T> implements CustomList<T> {
@@ -30,7 +27,7 @@ public class CustomArrayList<T> implements CustomList<T> {
 			
 			tempObj = this.itemsArray[index];
 			size++;
-			for (int i = itemsArray.length-1; i > index+1; i--) {
+			for (int i = size-1; i > index+1; i--) {
 				this.itemsArray[i] =this.itemsArray[i-1];
 			}
 			
@@ -64,25 +61,20 @@ public class CustomArrayList<T> implements CustomList<T> {
 	public T remove(int index) throws IndexOutOfBoundsException {
 		try {
 			tempObj = this.itemsArray[index];
-			if(index == size-1) {
-				this.itemsArray[index]=null;
-				Object[] itemsArrayTemp = new Object[this.itemsArray.length-1];
-				int i=0;
-				while(this.itemsArray[i] != null) {
-					itemsArrayTemp[i]=this.itemsArray[i];
-					i++;
+		
+				Object[] itemsArrayTemp = new Object[size-1];
+				
+				for(int i=0; i<index;i++) {
+					itemsArrayTemp[i]=itemsArray[i];
+				}
+				
+				for (int i=index; i< itemsArrayTemp.length; i++) {
+					itemsArrayTemp[i]=this.itemsArray[i+1];
 				}
 				
 				this.itemsArray =itemsArrayTemp;
 				size = this.itemsArray.length;
-			}else if(index >0 || index < size) {
-				for (int i = index; i < size; i++) {
-					this.itemsArray[i] = this.itemsArray[i+1];
-				}
-				
-				size--;
-				return (T) tempObj;
-			}	
+				return (T) tempObj;	
 		}catch (IndexOutOfBoundsException e) {
             System.out.println("Index out of bounds. The current size of this list is: " + size);
 		}
