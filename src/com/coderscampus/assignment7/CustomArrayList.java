@@ -22,9 +22,19 @@ public class CustomArrayList<T> implements CustomList<T> {
 	@Override
 	public boolean add(int index, T item) throws IndexOutOfBoundsException {
 		try {
-		
-			tempObj = this.itemsArray[index];			
-			this.itemsArray[index] = item;
+			Object[] tempArray = new Object[size+1];
+			tempArray[index] = item;
+			for (int j=0; j<index; j++) {
+				tempArray[j] = this.itemsArray[j];
+			}
+			
+			for (int i = size ; i > index; i--) {
+				 tempArray[i] =this.itemsArray[i-1];
+			}
+
+			this.itemsArray = tempArray;
+			//tempObj = this.itemsArray[index];
+			size++;
 			return true;			
 			
 		}catch(IndexOutOfBoundsException e) {

@@ -38,8 +38,10 @@ class CustomArrayListTest {
 		CustomList<Integer> sut = new CustomArrayList<>();
 				
 		//Act:
-		addItems(sut,1000);
+		addItems(sut,100);
 		sut.add(0,5);
+		sut.add(1, 889);
+		sut.add(9,19999);
 		sut.add(30,80);
 		sut.add(30);
 		sut.add(9999,2000); //Checking Index Out Of Bound Exception -> Expected on Console: Index out of bounds. The maximum size of the current list is: 1280
@@ -47,7 +49,7 @@ class CustomArrayListTest {
 		//Assert:
 		assertEquals(5,sut.get(0)); //Checking if the item 5 is add at the given index: 0  -> Expected: 5 , Actual: ?
 		assertEquals(80,sut.get(30)); //Checking if the item 80 is add at the given index: 30  -> Expected: 80 , Actual: ?
-		assertEquals(1001, sut.getSize()); //Checking if the length of the list is adjusting if we add more items to it -> Expected: 1001 , Actual: ?
+		assertEquals(105, sut.getSize()); //Checking if the length of the list is adjusting if we add more items to it -> Expected: 1001 , Actual: ?
 	}
 	
 	@Test
@@ -72,8 +74,8 @@ class CustomArrayListTest {
 		
 		//Assert:
 		assertEquals(90,sut.get(0));
-		assertEquals(900, sut.get(10));//Checking if the item: 1 is removed at index:0  -> Expected: 903 , Actual: ? 
-		assertEquals(13, sut.getSize());//Checking if the length of the list is adjusting if we remove more items to it -> Expected: 12 , Actual: ?
+		assertEquals(901, sut.get(12));//Checking if the item: 1 is removed at index:0  -> Expected: 903 , Actual: ? 
+		assertEquals(14, sut.getSize());//Checking if the length of the list is adjusting if we remove more items to it -> Expected: 12 , Actual: ?
 	}
 	
 	@Test
@@ -96,8 +98,8 @@ class CustomArrayListTest {
 		sut.get(9000);//Checking Index out of bound Exception
 		//Assert:
 		assertEquals(115, sut.get(10)); 
-		assertEquals(3, sut.get(0)); 
-		assertEquals(12,sut.getSize());//Checking while adding and removing items the size of the list is maintained. -> Expected: 11, Actual: ? 
+		assertEquals(2, sut.get(0)); 
+		assertEquals(14,sut.getSize());//Checking while adding and removing items the size of the list is maintained. -> Expected: 11, Actual: ? 
 	}
 	public static void addItems(CustomList<Integer> sut, int size) {
 		for(int i =0; i<size;i++)
