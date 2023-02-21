@@ -64,7 +64,6 @@ class CustomArrayListTest {
 		addItems(sut,10);
 		sut.remove(5);
 		sut.remove(9);
-		sut.remove(9);
 		sut.add(0,90);
 		sut.add(900);
 		sut.add(901);
@@ -74,8 +73,8 @@ class CustomArrayListTest {
 		
 		//Assert:
 		assertEquals(90,sut.get(0));
-		assertEquals(901, sut.get(12));//Checking if the item: 1 is removed at index:0  -> Expected: 903 , Actual: ? 
-		assertEquals(14, sut.getSize());//Checking if the length of the list is adjusting if we remove more items to it -> Expected: 12 , Actual: ?
+		assertEquals(901, sut.get(10));//Checking if the item: 1 is removed at index:0  -> Expected: 903 , Actual: ? 
+		assertEquals(11, sut.getSize());//Checking if the length of the list is adjusting if we remove more items to it -> Expected: 12 , Actual: ?
 	}
 	
 	@Test
@@ -99,7 +98,7 @@ class CustomArrayListTest {
 		//Assert:
 		assertEquals(115, sut.get(10)); 
 		assertEquals(2, sut.get(0)); 
-		assertEquals(14,sut.getSize());//Checking while adding and removing items the size of the list is maintained. -> Expected: 11, Actual: ? 
+		assertEquals(11,sut.getSize());//Checking while adding and removing items the size of the list is maintained. -> Expected: 11, Actual: ? 
 	}
 	public static void addItems(CustomList<Integer> sut, int size) {
 		for(int i =0; i<size;i++)

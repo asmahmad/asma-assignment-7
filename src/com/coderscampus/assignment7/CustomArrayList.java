@@ -22,6 +22,10 @@ public class CustomArrayList<T> implements CustomList<T> {
 	@Override
 	public boolean add(int index, T item) throws IndexOutOfBoundsException {
 		try {
+			if (size == itemsArray.length) {
+				itemsArray = Arrays.copyOf(itemsArray, itemsArray.length * 2);
+			}
+			
 			Object[] tempArray = new Object[size+1];
 			tempArray[index] = item;
 			for (int j=0; j<index; j++) {
@@ -29,11 +33,10 @@ public class CustomArrayList<T> implements CustomList<T> {
 			}
 			
 			for (int i = size ; i > index; i--) {
-				 tempArray[i] =this.itemsArray[i-1];
-			}
-
+				 tempArray[i] = this.itemsArray[i-1];
+			}				
 			this.itemsArray = tempArray;
-			//tempObj = this.itemsArray[index];
+			
 			size++;
 			return true;			
 			
@@ -61,13 +64,13 @@ public class CustomArrayList<T> implements CustomList<T> {
 
 	@Override
 	public T remove(int index) throws IndexOutOfBoundsException {
-		try {
-			tempObj = this.itemsArray[index];
-			this.itemsArray[index]=null;			
+		try {	
 				for (int i=index; i < size-1; i++) {
 					this.itemsArray[i]=this.itemsArray[i+1];
-					this.itemsArray[i+1] = null;
 				}
+				
+				this.itemsArray[size-1] = null;
+				size--;
 				return (T) tempObj;	
 		}catch (IndexOutOfBoundsException e) {
             System.out.println("Index out of bounds. The current size of this list is: " + size);
